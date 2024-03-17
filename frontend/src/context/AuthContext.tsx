@@ -11,7 +11,6 @@ export const useAuthContext = () => {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const AuthContextProvider = ({ children }: any) => {
   const userInLocal = localStorage.getItem("chat-app-user");
-  console.log("userInLocal", userInLocal);
   const [authUser, setAuthUser] = useState(userInLocal);
   return (
     <AuthContext.Provider value={{ authUser, setAuthUser }}>

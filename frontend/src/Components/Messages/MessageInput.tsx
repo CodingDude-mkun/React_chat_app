@@ -8,7 +8,6 @@ function MessageInput() {
   const { loading, sendMessage } = useSendMessage();
 
   const handleSubmit = async (e) => {
-    console.log("Handle Submit Called");
     e.preventDefault();
     if (!message) return;
     await sendMessage(message);

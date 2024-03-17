@@ -17,24 +17,16 @@ interface props {
 }
 
 function Message({ message }: props) {
-  console.log("messages in Message", message);
-
   const authUser = useAuthContext()?.authUser;
   const { selectedConversation } = useConversation();
   const fromMe = message.senderId === authUser?._id;
 
-  console.log("selectedConversation", selectedConversation);
-
-  console.log("authUser.profilePic", authUser.profilePic);
-  console.log(
-    "selectedConversation.profilePic",
-    selectedConversation.profilePic
-  );
   const chatClassName = fromMe ? "chat-end" : "chat-start";
   const chatBubble = fromMe ? "bg-blue-700" : "";
   const profilePic = fromMe
     ? authUser.profilePic
     : selectedConversation.profilePic;
+
   return (
     <div className={`chat ${chatClassName}`}>
       <div className="chat-image avatar">

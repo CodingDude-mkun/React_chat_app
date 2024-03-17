@@ -23,7 +23,6 @@ function Signup() {
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    console.log("loading", loading);
     await signUpUser(inputs);
   };
 

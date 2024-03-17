@@ -1,11 +1,12 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { useAuthContext } from "../context/AuthContext";
+import { useAuthContext } from "../context/AuthContext.tsx";
 
 export function useLogin() {
   const [loading, setLoading] = useState(false);
-  const authUser = useAuthContext()?.setAuthUser;
+  const { authUser, setAuthUser } = useAuthContext();
+  // const currentUser = useAuthContext()?.authUser;
   const login = async (username: string, password: string) => {
     const success = handleInputErrors(username, password);
     if (!success) return;
@@ -27,8 +28,9 @@ export function useLogin() {
       }
 
       localStorage.setItem("chat-app-user", data);
-      console.log("setAuthUser from login");
-      if (authUser) authUser(data);
+      console.log("setAuthUser from login", data);
+      setAuthUser(data);
+      console.log("currentUser", authUser);
     } catch (error) {
       toast.error(error.message);
     } finally {

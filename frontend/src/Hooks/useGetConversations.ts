@@ -25,7 +25,6 @@ function useGetConversations() {
         }
 
         setConversations(data);
-        console.log("setConversations");
       } catch (error) {
         toast(error.message);
       } finally {
