@@ -26,7 +26,7 @@ const protectRoute = async (req, res, next) => {
     next();
   } catch (error) {
     console.log("error in protectRoute : ", error);
-    res.send(500, error);
+    res.send(500, { error });
   }
 };
 

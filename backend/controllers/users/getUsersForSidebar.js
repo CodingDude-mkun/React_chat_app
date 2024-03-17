@@ -11,6 +11,6 @@ export async function getUserForSidebar(req, res) {
     return res.status(200).json(filteredUsers);
   } catch (error) {
     console.log("error in getUserForSidebar : ", error);
-    res.send(500, error);
+    res.send(500, { error });
   }
 }

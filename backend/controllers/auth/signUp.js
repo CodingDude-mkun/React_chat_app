@@ -49,7 +49,7 @@ async function signUp(req, res) {
     }
   } catch (err) {
     console.log("Error in sign up controller", err);
-    res.status(500, "Sign up Failed");
+    res.status(500).json({ error: "Sign up Failed" });
   }
 }
 

@@ -1,6 +1,17 @@
-import React from "react";
+/* eslint-disable react-hooks/rules-of-hooks */
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import useLogin from "../../Hooks/useLogin";
 
 function login() {
+  const [username, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+  const { loading, login } = useLogin();
+
+  const handleSubmit = async (e: { preventDefault: () => void }) => {
+    e.preventDefault();
+    await login(username, password);
+  };
   return (
     <div className="flex flex-col items-center justify-center min-w-96 mx-auto">
       <div className="w-full p-6 rounded-lg shadow-md bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0">
@@ -8,7 +19,7 @@ function login() {
           Login to
           <span className="text-blue-700"> Nebula</span>
         </h1>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div>
             <label className="label p-2">
               <span className="text-base label-text">Username</span>
@@ -16,6 +27,7 @@ function login() {
             <input
               type="text"
               placeholder="Enter username"
+              onChange={(e) => setUserName(e.target.value)}
               className="w-full input input-bordered h-10"
             />
           </div>
@@ -27,17 +39,25 @@ function login() {
               type="password"
               placeholder="Enter password"
               className="w-full input input-bordered h-10"
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
 
-          <a
-            href="#"
+          <Link
+            to="/signup"
             className="text-sm hover:underline hover:text-blue-600 mt-2 inline-block"
           >
             {"Don't"} have an account?
-          </a>
-          <button className="btn btn-outline btn-block btn-sm mt-2 btn-primary">
-            Login
+          </Link>
+          <button
+            className="btn btn-outline btn-block btn-sm mt-2 btn-primary"
+            disabled={loading}
+          >
+            {loading ? (
+              <span className="loading loading-spinner"></span>
+            ) : (
+              "Login"
+            )}
           </button>
         </form>
       </div>

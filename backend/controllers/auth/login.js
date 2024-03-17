@@ -26,7 +26,7 @@ async function login(req, res) {
     });
   } catch (err) {
     console.log("Error in login controller", err);
-    return res.status(500, "login Failed");
+    return res.status(500).json({ error: "login Failed" });
   }
 }
 

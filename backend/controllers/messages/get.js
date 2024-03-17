@@ -8,10 +8,10 @@ async function getMessages(req, res) {
     const conv = await Conversation.findOne({
       participants: { $all: [senderId, userToChatId] },
     }).populate("messages");
-
-    res.status(200).json(conv.messages);
+    res.status(200).json(conv ? conv.messages : []);
   } catch (error) {
-    res.send(500, error);
+    console.log(error.message);
+    res.status(500).json({ error: error.message });
   }
 }
 

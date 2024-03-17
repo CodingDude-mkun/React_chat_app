@@ -5,6 +5,7 @@ async function sendMessage(req, res) {
   try {
     const { message } = req.body;
     const { id: receiverId } = req.params;
+
     const senderId = req.user._id;
     let conv = await Conversation.findOne({
       participants: { $all: [senderId, receiverId] },
@@ -27,7 +28,6 @@ async function sendMessage(req, res) {
     }
 
     await Promise.all([newMessage.save(), conv.save()]);
-
     res.status(201).json(newMessage);
   } catch (err) {
     console.log("error on sendmessage: ", err);
